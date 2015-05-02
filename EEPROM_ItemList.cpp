@@ -1,5 +1,5 @@
 /*************************************************************
-project: <EEPROMex>
+project: <EEPROMextent>
 author: <Thierry PARIS>
 description: <Class for a full hierarchical list of items of the same size stored in EEPROM>
 *************************************************************/

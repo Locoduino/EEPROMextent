@@ -1,5 +1,5 @@
 /*************************************************************
-project: <EEPROMex>
+project: <EEPROMextent>
 author: <Thierry PARIS>
 description: <Class for a circular buffer of data stored in EEPROM>
 *************************************************************/
@@ -9,7 +9,7 @@ description: <Class for a circular buffer of data stored in EEPROM>
 /*
 A circular buffer is a way to reduce the use of each EEPROM cell,
 and improve life time of the full EEPROM memory.
-An index of bytes is stored at the begenning of the area.
+An index of bytes is stored at the begining of the area.
 Each index represents a data area.
 
 |0|1|2|3|4||---0---|---1---|---2---|---3---|---4---|

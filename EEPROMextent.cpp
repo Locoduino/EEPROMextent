@@ -1,3 +1,9 @@
+/*************************************************************
+project: <EEPROMextent>
+author: <Thierry PARIS>
+description: <Class for basic EEPROM functions>
+*************************************************************/
+
 #include "EEPROMextent.h"
 
 EEPROMextentClass EEPROMextent;
@@ -51,8 +57,8 @@ int EEPROMextentClass::updateString(int ee, const char *inData)
 	return i;
 }
 
-void EEPROMextentClass::clear(int inStartingAddress, int inSize)
+void EEPROMextentClass::clear(int inStartingAddress, int inSize, byte inFillCharacter)
 {
 	for (int i = inStartingAddress; i < inStartingAddress + inSize; i++)
-		eeprom_update_byte((uint8_t *)i, 0);
+		eeprom_update_byte((uint8_t *)i, inFillCharacter);
 }

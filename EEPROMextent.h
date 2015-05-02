@@ -17,8 +17,8 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef EEPROMextent_h
-#define EEPROMextent_h
+#ifndef __EEPROMextent_h__
+#define __EEPROMextent_h__
 
 #ifndef VISUALSTUDIO
 #include <avr/eeprom.h>
@@ -70,7 +70,7 @@ public:
 	int writeString(int inStartPos, const char *inString);
 	int updateString(int inStartPos, const char *inString);
 
-	void clear(int inStartingAddress, int inSize);
+	void clear(int inStartingAddress, int inSize, byte inFillCharacter = 0);
 };
 
 extern EEPROMextentClass EEPROMextent;
