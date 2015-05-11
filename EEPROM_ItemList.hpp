@@ -9,7 +9,6 @@
 
 #define EEPROMLIST_EMPTY_OWNER	255
 
-#include "arduino.h"
 #include "EEPROMextent.h"
 
 class EEPROM_ItemListClass
@@ -51,19 +50,12 @@ public:
 		return EEPROMextent.read(GetItemPosRaw(inSlotNumber) + 1);
 	}
 
-	inline int SaveItemPrefix(byte inSlotNumber, byte inType, byte inOwner)
-	{
-		int pos = GetItemPosRaw(inSlotNumber);
-		EEPROMextent.update(pos++, inType);
-		EEPROMextent.update(pos++, inOwner);
-		return pos;
-	}
+	int SaveItemPrefix(byte inSlotNumber, byte inType, byte inOwner);
 
 	byte GetFirstFreeSlot();
 	byte FindItem(byte inType, byte inStartSlotNumber = 0, byte inOwnerId = 255);
 	byte CountItems(byte inType);
 	byte CountOwnedItems(byte inOwnerId);
-	char *GetItems();
 	void clear() const;
 };
 

@@ -11,7 +11,7 @@ The item list area of the EEPROM is a long list of items of the same size.
 Each item can be identified by a type.
 Each item has its own structure, but is stored in a 'slot' of EEPROM_ItemList::ItemSize.
 Each item slot begins with two bytes : the type, and the owner (255 if null)
-This owner gives the hability to build a hierarchical item tree !
+This owner gives the ability to build a hierarchical item tree !
 The owner id is in reality the address of the slot of the owner !
 */
 
@@ -92,9 +92,12 @@ byte EEPROM_ItemListClass::GetFirstFreeSlot()
 	return 255;
 }
 
-char *EEPROM_ItemListClass::GetItems()
+int EEPROM_ItemListClass::SaveItemPrefix(byte inSlotNumber, byte inType, byte inOwner)
 {
-	return 0;
+	int pos = GetItemPosRaw(inSlotNumber);
+	EEPROMextent.update(pos++, inType);
+	EEPROMextent.update(pos++, inOwner);
+	return pos;
 }
 
 void EEPROM_ItemListClass::clear() const

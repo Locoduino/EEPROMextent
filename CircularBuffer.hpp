@@ -3,11 +3,6 @@
 #define __EEPROM_CircularBuffer_H__
 //-------------------------------------------------------------------
 
-//-------------------------------------------------------------------
-
-//-------------------------------------------------------------------
-
-#include "arduino.h"
 #include "EEPROMextent.h"
 
 class CircularBuffer
@@ -26,8 +21,8 @@ public:
 	}
 
 	void *Read(void* outpObject);
-	void Write(void* inpObject);
-	void Update(void *inpObject);
+	void Write(void* inpObject, bool inUpdate = false);
+	inline void Update(void *inpObject) { Write(inpObject, true); }
 
 	void Clear() const;
 

@@ -9,7 +9,7 @@ description: <Class for a circular buffer of data stored in EEPROM>
 /*
 A circular buffer is a way to reduce the use of each EEPROM cell,
 and improve life time of the full EEPROM memory.
-An index of bytes is stored at the begining of the area.
+An index of bytes is stored at the beginning of the area.
 Each index represents a data area.
 
 |0|1|2|3|4||---0---|---1---|---2---|---3---|---4---|
@@ -55,7 +55,7 @@ void * CircularBuffer::Read(void* outpData)
 	return outpData;
 }
 
-void CircularBuffer::Write(void* inpData)
+void CircularBuffer::Write(void* inpData, bool inUpdate)
 {
 	byte place = FindEnd();
 	byte itemNb = EEPROMextent.read(this->StartListPos + place);
@@ -64,21 +64,16 @@ void CircularBuffer::Write(void* inpData)
 	if (place >= this->ReplicaNumber)
 		place = 0;
 
-	EEPROMextent.write(this->StartListPos + place, ++itemNb);
-	eeprom_write_block((const uint8_t *)inpData, (uint8_t *)(this->StartListPos + this->ReplicaNumber + (this->ItemSize * place)), this->ItemSize);
-}
-
-void CircularBuffer::Update(void* inpData)
-{
-	byte place = FindEnd();
-	byte itemNb = EEPROMextent.read(this->StartListPos + place);
-
-	place++;
-	if (place >= this->ReplicaNumber)
-		place = 0;
-
-	EEPROMextent.update(this->StartListPos + place, ++itemNb);
-	eeprom_update_block((const uint8_t *)inpData, (uint8_t *)(this->StartListPos + this->ReplicaNumber + (this->ItemSize * place)), this->ItemSize);
+	if (inUpdate)
+	{
+		EEPROMextent.update(this->StartListPos + place, ++itemNb);
+		eeprom_update_block((const uint8_t *)inpData, (uint8_t *)(this->StartListPos + this->ReplicaNumber + (this->ItemSize * place)), this->ItemSize);
+	}
+	else
+	{
+		EEPROMextent.write(this->StartListPos + place, ++itemNb);
+		eeprom_write_block((const uint8_t *)inpData, (uint8_t *)(this->StartListPos + this->ReplicaNumber + (this->ItemSize * place)), this->ItemSize);
+	}
 }
 
 void CircularBuffer::Clear() const
@@ -90,6 +85,7 @@ void CircularBuffer::Clear() const
 #include "Serial.hpp"
 #endif
 
+#ifdef DEBUG_MODE
 void CircularBuffer::printStatus()
 {
 	Serial.print(F("CB Status : "));
@@ -100,6 +96,7 @@ void CircularBuffer::printStatus()
 	}
 	Serial.println(F("|"));
 }
+#endif
 
 
 

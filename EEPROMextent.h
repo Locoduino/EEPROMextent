@@ -37,6 +37,11 @@ void eeprom_write_block(const uint8_t *src, uint8_t *dst, size_t inSize);
 void eeprom_update_block(const uint8_t *src, uint8_t *dst, size_t inSize);
 #endif
 
+////////////////////////////////////////////////////////
+// Add a '//' at the beginning of the line to be in 
+// release mode.
+//#define DEBUG_MODE
+
 class EEPROMextentClass
 {
 public:
