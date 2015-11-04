@@ -1,0 +1,10 @@
+This is a library for Arduino to read/write complex data to EEPROM.
+
+
+Whats New ?
+
+
+08/06/2015 V1.00
+	- Naissance de EEPROMextent !
+	
+	- EEPROMextent is Born !
