@@ -104,10 +104,11 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\CircularBuffer.hpp" />
-    <ClInclude Include="..\EEPROMextent.h" />
-    <ClInclude Include="..\EEPROM_ItemList.hpp" />
+    <ClInclude Include="..\src\CircularBuffer.hpp" />
+    <ClInclude Include="..\src\EEPROMextent.h" />
+    <ClInclude Include="..\src\EEPROM_ItemList.hpp" />
     <ClInclude Include="arduino.h" />
+    <ClInclude Include="EEPROMextent.h" />
     <ClInclude Include="EEPROMex_VStudioMfc.h" />
     <ClInclude Include="EEPROMex_VStudioMfcDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -117,9 +118,9 @@
     <ClInclude Include="WString.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CircularBuffer.cpp" />
-    <ClCompile Include="..\EEPROMextent.cpp" />
-    <ClCompile Include="..\EEPROM_ItemList.cpp" />
+    <ClCompile Include="..\src\CircularBuffer.cpp" />
+    <ClCompile Include="..\src\EEPROMextent.cpp" />
+    <ClCompile Include="..\src\EEPROM_ItemList.cpp" />
     <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="EEPROM.cpp" />
     <ClCompile Include="EEPROMex_VStudioMfc.cpp" />

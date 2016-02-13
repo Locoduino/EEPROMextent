@@ -333,7 +333,9 @@ void setup()
 	//cb.Clear();
 
 	cb.Write(&p1);
+#ifdef DEBUG_MODE
 	cb.printStatus();
+#endif
 	cb.Read(&p2);
 
 	if (p2.number != 789 || p2.delay != 12345 || p2.exists != true)
@@ -344,7 +346,9 @@ void setup()
 	p2.number++;
 
 	cb.Write(&p2);
+#ifdef DEBUG_MODE
 	cb.printStatus();
+#endif
 	cb.Read(&p1);
 
 	if (p1.number != 790 || p1.delay != 12346 || p1.exists != false)
