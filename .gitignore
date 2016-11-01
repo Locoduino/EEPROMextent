@@ -3,6 +3,7 @@ VStudio/EEPROMex_VStudioMfc.sdf
 VStudio/stdafx.pch
 VStudio/EEPROMex_VStudioMfc.v12.suo
 VisualLibrary
-VStudio/.vs/EEPROMex_VStudioMfc/v14/.suo
 VStudio/*.opendb
 VStudio/.vs
+*.suo
+*.db

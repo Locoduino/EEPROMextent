@@ -332,8 +332,10 @@ void setup()
 
 	//cb.Clear();
 
+	// Writing buffer
+
 	cb.Write(&p1);
-#ifdef DEBUG_MODE
+#ifdef EEPROMEXTENT_DEBUG_MODE
 	cb.printStatus();
 #endif
 	cb.Read(&p2);
@@ -346,9 +348,43 @@ void setup()
 	p2.number++;
 
 	cb.Write(&p2);
-#ifdef DEBUG_MODE
+#ifdef EEPROMEXTENT_DEBUG_MODE
 	cb.printStatus();
 #endif
+	cb.Read(&p1);
+
+	if (p1.number != 790 || p1.delay != 12346 || p1.exists != false)
+		Serial.println("CB ERROR !!");
+
+	// Position only buffer
+
+	p1.delay = 12345;
+	p1.exists = true;
+	p1.number = 789;
+
+	int pos = cb.StartWrite();
+	EEPROMextent.writeAnything(pos, p1);
+#ifdef EEPROMEXTENT_DEBUG_MODE
+	cb.printStatus();
+#endif
+	pos = cb.GetStartRead();
+	cb.Read(&p2);
+
+	if (p2.number != 789 || p2.delay != 12345 || p2.exists != true)
+		Serial.println("CB ERROR !!");
+
+	p2.delay++;
+	p2.exists = false;
+	p2.number++;
+
+	for (int i = 0; i < 10; i++)
+		pos = cb.StartWrite();
+
+	EEPROMextent.writeAnything(pos, p2);
+#ifdef EEPROMEXTENT_DEBUG_MODE
+	cb.printStatus();
+#endif
+	pos = cb.GetStartRead();
 	cb.Read(&p1);
 
 	if (p1.number != 790 || p1.delay != 12346 || p1.exists != false)

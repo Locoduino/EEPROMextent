@@ -47,7 +47,7 @@ byte CircularBuffer::FindEnd()
 	return 255;
 }
 
-void * CircularBuffer::Read(void* outpData)
+void * CircularBuffer::read(void* outpData)
 {
 	byte place = FindEnd();
 	eeprom_read_block((uint8_t *)outpData, (const uint8_t *)(this->StartListPos + this->ReplicaNumber + (this->ItemSize * place)), this->ItemSize);
@@ -55,7 +55,7 @@ void * CircularBuffer::Read(void* outpData)
 	return outpData;
 }
 
-void CircularBuffer::Write(void* inpData, bool inUpdate)
+void CircularBuffer::write(void* inpData, bool inUpdate)
 {
 	byte place = FindEnd();
 	byte itemNb = EEPROMextent.read(this->StartListPos + place);
@@ -76,16 +76,36 @@ void CircularBuffer::Write(void* inpData, bool inUpdate)
 	}
 }
 
-void CircularBuffer::Clear() const
+void CircularBuffer::clear() const
 {
 	EEPROMextent.clear(this->StartListPos, (this->ItemSize + 1) * this->ReplicaNumber);
+}
+
+int CircularBuffer::getStartRead()
+{
+	byte place = FindEnd();
+	return this->StartListPos + this->ReplicaNumber + (this->ItemSize * place);
+}
+
+int CircularBuffer::startWrite()
+{
+	byte place = FindEnd();
+	byte itemNb = EEPROMextent.read(this->StartListPos + place);
+
+	place++;
+	if (place >= this->ReplicaNumber)
+		place = 0;
+
+	EEPROMextent.update(this->StartListPos + place, ++itemNb);
+
+	return this->StartListPos + this->ReplicaNumber + (this->ItemSize * place);
 }
 
 #ifdef VISUALSTUDIO
 #include "Serial.hpp"
 #endif
 
-#ifdef DEBUG_MODE
+#ifdef EEPROMEXTENT_DEBUG_MODE
 void CircularBuffer::printStatus()
 {
 	Serial.print(F("CB Status : "));

@@ -84,7 +84,7 @@ byte EEPROM_ItemListClass::GetFirstFreeSlot()
 	for (int pos = StartListPos; pos < this->StartListPos + this->ListSize; pos += ItemSize)
 	{
 		byte val = EEPROMextent.read(pos);
-		if (EEPROMextent.read(pos) == 0)
+		if (val == 0)
 			return slot;
 		slot++;
 	}

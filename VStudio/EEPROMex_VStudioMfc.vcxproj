@@ -108,7 +108,6 @@
     <ClInclude Include="..\src\EEPROMextent.h" />
     <ClInclude Include="..\src\EEPROM_ItemList.hpp" />
     <ClInclude Include="arduino.h" />
-    <ClInclude Include="EEPROMextent.h" />
     <ClInclude Include="EEPROMex_VStudioMfc.h" />
     <ClInclude Include="EEPROMex_VStudioMfcDlg.h" />
     <ClInclude Include="Resource.h" />

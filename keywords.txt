@@ -14,20 +14,22 @@ EEPROMextent KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-read KEYWORD2
-write KEYWORD2
-update KEYWORD2
+read 			KEYWORD2
+write 			KEYWORD2
+update 			KEYWORD2
 
-readAnything KEYWORD2
-writeAnything KEYWORD2
-updateAnything KEYWORD2
+readAnything	KEYWORD2
+writeAnything	KEYWORD2
+updateAnything	KEYWORD2b
 
-readString KEYWORD2
-writeString KEYWORD2
-updateString KEYWORD2
+readString		KEYWORD2
+writeString		KEYWORD2
+updateString	KEYWORD2
 
 clear KEYWORD2
-
+getStartRead	KEYWORD2
+startWrite		KEYWORD2
+printStatus		KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

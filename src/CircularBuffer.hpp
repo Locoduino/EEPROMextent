@@ -14,19 +14,22 @@ public:
 
 	CircularBuffer() { this->ItemSize = 0; this->ReplicaNumber = 0; this->StartListPos = 0; }
 
-	int Setup(int inStartListPos, byte inItemSize, byte inReplicaNumber) 
+	int begin(int inStartListPos, byte inItemSize, byte inReplicaNumber) 
 	{ 
 		this->StartListPos = inStartListPos;  this->ItemSize = inItemSize; this->ReplicaNumber = inReplicaNumber; 
 		return (this->ItemSize + 1) * this->ReplicaNumber;
 	}
 
-	void *Read(void* outpObject);
-	void Write(void* inpObject, bool inUpdate = false);
-	inline void Update(void *inpObject) { Write(inpObject, true); }
+	void *read(void* outpObject);
+	void write(void* inpObject, bool inUpdate = false);
+	inline void update(void *inpObject) { write(inpObject, true); }
 
-	void Clear() const;
+	int getStartRead();
+	int startWrite();
 
-#ifdef DEBUG_MODE
+	void clear() const;
+
+#ifdef EEPROMEXTENT_DEBUG_MODE
 	void printStatus();
 #endif
 

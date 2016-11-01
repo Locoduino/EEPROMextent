@@ -40,7 +40,7 @@ void eeprom_update_block(const uint8_t *src, uint8_t *dst, size_t inSize);
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-//#define DEBUG_MODE
+#define EEPROMEXTENT_DEBUG_MODE
 
 class EEPROMextentClass
 {

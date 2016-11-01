@@ -24,7 +24,7 @@ void setup()
 	EEPROMextent.write(0, 10);
 	EEPROMextent.write(1, 11);
 
-	int size = EEPROMextent.writeAnything(10, p1);
+	EEPROMextent.writeAnything(10, p1);
 	EEPROMextent.writeString(50, "Bonjour la France");
 
 	// Reading the writen data.
