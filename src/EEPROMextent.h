@@ -23,6 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef VISUALSTUDIO
 #include <avr/eeprom.h>
 #include <inttypes.h>
+//#include <EEPROM.h>
+#define INT64
+#else
+#define INT64	(__int64)
 #endif
 
 #include "arduino.h"
@@ -45,9 +49,9 @@ void eeprom_update_block(const uint8_t *src, uint8_t *dst, size_t inSize);
 class EEPROMextentClass
 {
 public:
-	inline uint8_t read(int address) { return eeprom_read_byte((uint8_t *)address); }
-	inline void write(int address, uint8_t value) { eeprom_write_byte((uint8_t *)address, value); }
-	inline void update(int address, uint8_t value) { eeprom_update_byte((uint8_t *)address, value); }
+	inline uint8_t read(int address) { return eeprom_read_byte((uint8_t *)INT64 address); }
+	inline void write(int address, uint8_t value) { eeprom_write_byte((uint8_t *)INT64 address, value); }
+	inline void update(int address, uint8_t value) { eeprom_update_byte((uint8_t *)INT64 address, value); }
 
 #ifdef VISUALSTUDIO
 	EEPROMextentClass();
@@ -55,19 +59,19 @@ public:
 
 	template <class T> int readAnything(int ee, T& value)
 	{
-		eeprom_read_block((byte*)(void*)&value, (const uint8_t *)ee, sizeof(value));
+		eeprom_read_block((byte*)(void*)&value, (const uint8_t *)INT64 ee, sizeof(value));
 		return sizeof(value);
 	}
 
 	template <class T> int writeAnything(int ee, const T& value)
 	{
-		eeprom_write_block((const byte*)(const void*)&value, (uint8_t *)ee, sizeof(value));
+		eeprom_write_block((const byte*)(const void*)&value, (uint8_t *)INT64 ee, sizeof(value));
 		return sizeof(value);
 	}
 
 	template <class T> int updateAnything(int ee, const T& value)
 	{
-		eeprom_update_block((const byte*)(const void*)&value, (uint8_t *)ee, sizeof(value));
+		eeprom_update_block((const byte*)(const void*)&value, (uint8_t *)INT64 ee, sizeof(value));
 		return sizeof(value);
 	}
 

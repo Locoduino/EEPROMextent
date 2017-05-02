@@ -29,7 +29,7 @@ EEPROMextentClass::EEPROMextentClass()
 
 uint8_t eeprom_read_byte(uint8_t *inAddress)
 { 
-	return eeprom_image[(int)inAddress];
+	return eeprom_image[(int)INT64 inAddress];
 }
 
 void writeFile()
@@ -49,7 +49,7 @@ void writeFile()
 
 void eeprom_write_byte(uint8_t *inAddress, uint8_t inValue)
 {
-	eeprom_image[(int)inAddress] = inValue;
+	eeprom_image[(int)INT64 inAddress] = inValue;
 	writeFile();
 }
 
@@ -64,7 +64,7 @@ void eeprom_update_byte(uint8_t *inAddress, uint8_t inValue)
 void eeprom_write_block(const uint8_t *inSrc, uint8_t *inDst, size_t inSize)
 {
 	const byte* p = (const byte*)inSrc;
-	int dst = (int) inDst;
+	int dst = (int)INT64 inDst;
 	for (size_t i = 0; i < inSize; i++)
 		eeprom_image[dst++] = *(p++);
 	writeFile();
@@ -73,7 +73,7 @@ void eeprom_write_block(const uint8_t *inSrc, uint8_t *inDst, size_t inSize)
 void eeprom_read_block(uint8_t *inDst, const uint8_t *inSrc, size_t inSize)
 {
 	byte* p = (byte*)inDst;
-	int src = (int)inSrc;
+	int src = (int)INT64 inSrc;
 	for (size_t i = 0; i < inSize; i++)
 		*(p++) = eeprom_image[src++];
 }

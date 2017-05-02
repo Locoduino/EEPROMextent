@@ -3,10 +3,6 @@
 #define __EEPROM_ItemList_H__
 //-------------------------------------------------------------------
 
-//-------------------------------------------------------------------
-
-//-------------------------------------------------------------------
-
 #define EEPROMLIST_EMPTY_OWNER	255
 
 #include "EEPROMextent.h"
@@ -20,7 +16,7 @@ public:
 
 	EEPROM_ItemListClass() { this->ItemSize = 0; this->ListSize = 0; this->StartListPos = 0; }
 
-	void Setup(int inStartListPos, byte inItemSize, int inListSize) { this->StartListPos = inStartListPos;  this->ItemSize = inItemSize; this->ListSize = inListSize; }
+	void begin(int inStartListPos, byte inItemSize, int inListSize) { this->StartListPos = inStartListPos;  this->ItemSize = inItemSize; this->ListSize = inListSize; }
 
 	void FreeItem(byte inSlotNumber);
 	void FreeOwnedItems(byte inOwnerSlotNumber);

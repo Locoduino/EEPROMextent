@@ -3,6 +3,10 @@ This is a library for Arduino to read/write complex data to EEPROM.
 
 Whats New ?
 
+02/05/2017 V1.11
+	- Correction d'erreurs de compilation: __int64, EEPROM, EEPROM_SIZE undefined...
+
+	- Fix of compilation problems : __int64, EEPROM, EEPROM_SIZE undefined...
 
 01/11/2016 V1.10
 	- Renommage des fonctions de CircualrBuffer avec des minuscules et Setup en begin.

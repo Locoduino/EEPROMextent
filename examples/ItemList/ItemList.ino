@@ -70,7 +70,7 @@ void setup()
 	// Estimated size of 15 bytes for each parent and each child...
 	// Arbitrary start position for writing in EEPROM.
 	// Arbitrary EEPROM size, must be adapted according to your Arduino model.
-	ItemList.Setup(10, 20, 1024);
+	ItemList.begin(10, 20, 1024);
 
 	parent p1;
 	p1.id = 0;
