@@ -4,6 +4,7 @@ author: <Thierry PARIS>
 description: <Class for basic EEPROM functions>
 *************************************************************/
 
+#include "arduino.h"
 #include "EEPROMextent.h"
 
 EEPROMextentClass EEPROMextent;
@@ -13,7 +14,7 @@ char *EEPROMextentClass::readString(int ee, char *outData, int inSize)
 	byte* p = (byte*)outData;
 	for (int i = 0; i < inSize; i++)
 	{
-		*p = eeprom_read_byte((uint8_t *)ee++);
+		*p = eeprom_read_byte((uint8_t *) INT64 ee++);
 
 		if (*p == 0)
 			break;
@@ -31,7 +32,7 @@ int EEPROMextentClass::writeString(int ee, const char *inData)
 	for (i = 0;; i++)
 	{
 		const byte b = *p;
-		eeprom_write_byte((uint8_t *)ee++, b), ++p;
+		eeprom_write_byte((uint8_t *) INT64 ee++, b), ++p;
 
 		if (b == 0)
 			return i + 1;
@@ -48,7 +49,7 @@ int EEPROMextentClass::updateString(int ee, const char *inData)
 	for (i = 0;; i++)
 	{
 		const byte b = *p;
-		eeprom_update_byte((uint8_t *)ee++, b), ++p;
+		eeprom_update_byte((uint8_t *) INT64 ee++, b), ++p;
 
 		if (b == 0)
 			return i + 1;
@@ -60,5 +61,5 @@ int EEPROMextentClass::updateString(int ee, const char *inData)
 void EEPROMextentClass::clear(int inStartingAddress, int inSize, byte inFillCharacter)
 {
 	for (int i = inStartingAddress; i < inStartingAddress + inSize; i++)
-		eeprom_update_byte((uint8_t *)i, inFillCharacter);
+		eeprom_update_byte((uint8_t *)INT64 i, inFillCharacter);
 }

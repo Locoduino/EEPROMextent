@@ -19,6 +19,8 @@ struct child
 byte save_parent(parent &aParent);
 byte save_child(child &aChild, byte aParent);
 
+#define ITEM_SIZE		20
+
 byte save_parent(parent &aParent)
 {
 	byte p1_place = ItemList.GetFirstFreeSlot();
@@ -27,12 +29,12 @@ byte save_parent(parent &aParent)
 	// 255 means this item have no parent itself. So 254 is the maximum number of items which can be saved by this library!
 	int pos = ItemList.SaveItemPrefix(p1_place, 'P', 255);
 	// Then write the parent content (do not forget to update the position 'pos' for each field...):
-	EEPROMextent.write(pos++, aParent.id);
+	EEPROMextent.writeByte(pos++, aParent.id);
 	pos += EEPROMextent.writeAnything(pos, aParent.number);
 	EEPROMextent.writeString(pos, aParent.text);
 	pos += 10;
 
-	if (pos - ItemList.GetItemPosRaw(p1_place) > ItemList.ItemSize)
+	if (pos - ItemList.GetItemPosRaw(p1_place) > ITEM_SIZE)
 	{
 		Serial.print("Too long parent record : increase the item size to ");
 		Serial.print(pos - ItemList.GetItemPosRaw(p1_place));
@@ -50,12 +52,12 @@ byte save_child(child &aChild, byte aParent)
 	// p1_place means that the parent of this item is the one at p1_place.
 	int pos = ItemList.SaveItemPrefix(c1_place, 'C', aParent);
 	// Then write the child content (do not forget to update the position 'pos' for each field...):
-	EEPROMextent.write(pos++, aChild.id);
+	EEPROMextent.writeByte(pos++, aChild.id);
 	EEPROMextent.writeString(pos, aChild.descr);
 	pos += 10; // maximum size of descr string as in its declaration.
 	pos += EEPROMextent.writeAnything(pos, aChild.dummy);
 
-	if (pos - ItemList.GetItemPosRaw(c1_place) > ItemList.ItemSize)
+	if (pos - ItemList.GetItemPosRaw(c1_place) > ITEM_SIZE)
 	{
 		Serial.print("Too long child record : increase the item size to ");
 		Serial.print(pos - ItemList.GetItemPosRaw(c1_place));
@@ -70,7 +72,7 @@ void setup()
 	// Estimated size of 15 bytes for each parent and each child...
 	// Arbitrary start position for writing in EEPROM.
 	// Arbitrary EEPROM size, must be adapted according to your Arduino model.
-	ItemList.begin(10, 20, 1024);
+	ItemList.begin(10, ITEM_SIZE, 1024);
 
 	parent p1;
 	p1.id = 0;

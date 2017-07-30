@@ -7,3 +7,5 @@ VStudio/*.opendb
 VStudio/.vs
 *.suo
 *.db
+
+*.log

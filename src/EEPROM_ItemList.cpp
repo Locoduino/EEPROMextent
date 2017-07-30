@@ -18,21 +18,21 @@ The owner id is in reality the address of the slot of the owner !
 void EEPROM_ItemListClass::FreeItem(byte inSlotNumber)
 {
 	// Replace the type by '0' : free slot !
-	EEPROMextent.update(GetItemPosRaw(inSlotNumber), 0);
+	EEPROMextent.updateByte(GetItemPosRaw(inSlotNumber), 0);
 	FreeOwnedItems(inSlotNumber);
 }
 
 void EEPROM_ItemListClass::FreeOwnedItems(byte inOwnerSlotNumber)
 {
 	int slot = 0;
-	for (int pos = this->StartListPos; pos < this->StartListPos + this->ListSize; pos += ItemSize)
+	for (int pos = this->startListPos; pos < this->startListPos + this->listSize; pos += itemSize)
 	{
-		if (EEPROMextent.read(pos) == 0)
+		if (EEPROMextent.readByte(pos) == 0)
 			continue;
-		if (EEPROMextent.read(pos + 1) == inOwnerSlotNumber)
+		if (EEPROMextent.readByte(pos + 1) == inOwnerSlotNumber)
 		{
 			// Replace the type by '0' : free slot !
-			EEPROMextent.update(pos, 0);
+			EEPROMextent.updateByte(pos, 0);
 			// also remove the owned items, and their owned items in turn...
 			FreeItem(slot);
 		}
@@ -44,10 +44,10 @@ byte EEPROM_ItemListClass::FindItem(byte inType, byte inStartSlotNumber, byte in
 {
 	byte slot = inStartSlotNumber;
 
-	for (int pos = StartListPos + (inStartSlotNumber * ItemSize); pos < this->StartListPos + this->ListSize; pos += ItemSize)
+	for (int pos = startListPos + (inStartSlotNumber * itemSize); pos < this->startListPos + this->listSize; pos += itemSize)
 	{
-		if (EEPROMextent.read(pos) == inType)
-			if (inOwnerId == 255 || EEPROMextent.read(pos + 1) == inOwnerId)
+		if (EEPROMextent.readByte(pos) == inType)
+			if (inOwnerId == 255 || EEPROMextent.readByte(pos + 1) == inOwnerId)
 				return slot;
 		slot++;
 	}
@@ -59,8 +59,8 @@ byte EEPROM_ItemListClass::CountItems(byte inType)
 {
 	byte nb = 0;
 
-	for (int pos = StartListPos; pos < this->StartListPos + this->ListSize; pos += ItemSize)
-		if (EEPROMextent.read(pos) == inType)
+	for (int pos = startListPos; pos < this->startListPos + this->listSize; pos += itemSize)
+		if (inType == 0 || EEPROMextent.readByte(pos) == inType)
 			nb++;
 
 	return nb;
@@ -70,8 +70,8 @@ byte EEPROM_ItemListClass::CountOwnedItems(byte inOwnerId)
 {
 	byte nb = 0;
 
-	for (int pos = StartListPos; pos < this->StartListPos + this->ListSize; pos += ItemSize)
-		if (EEPROMextent.read(pos) != 0 && EEPROMextent.read(pos + 1) == inOwnerId)
+	for (int pos = startListPos; pos < this->startListPos + this->listSize; pos += itemSize)
+		if (EEPROMextent.readByte(pos) != 0 && EEPROMextent.readByte(pos + 1) == inOwnerId)
 			nb++;
 
 	return nb;
@@ -81,9 +81,9 @@ byte EEPROM_ItemListClass::GetFirstFreeSlot()
 {
 	byte slot = 0;
 
-	for (int pos = StartListPos; pos < this->StartListPos + this->ListSize; pos += ItemSize)
+	for (int pos = startListPos; pos < this->startListPos + this->listSize; pos += itemSize)
 	{
-		byte val = EEPROMextent.read(pos);
+		byte val = EEPROMextent.readByte(pos);
 		if (val == 0)
 			return slot;
 		slot++;
@@ -95,14 +95,14 @@ byte EEPROM_ItemListClass::GetFirstFreeSlot()
 int EEPROM_ItemListClass::SaveItemPrefix(byte inSlotNumber, byte inType, byte inOwner)
 {
 	int pos = GetItemPosRaw(inSlotNumber);
-	EEPROMextent.update(pos++, inType);
-	EEPROMextent.update(pos++, inOwner);
+	EEPROMextent.updateByte(pos++, inType);
+	EEPROMextent.updateByte(pos++, inOwner);
 	return pos;
 }
 
 void EEPROM_ItemListClass::clear() const
 {
-	EEPROMextent.clear(this->StartListPos, this->ListSize);
+	EEPROMextent.clear(this->startListPos, this->listSize);
 }
 
 

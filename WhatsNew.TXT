@@ -3,13 +3,25 @@ This is a library for Arduino to read/write complex data to EEPROM.
 
 Whats New ?
 
+30/07/2017 V1.20
+	- Nouvelle doc en anglais dans extras/Doc
+	- Renommage de certains arguments dans les fonctions de CircularBuffer et EEPROM_ItemList.h
+	- Renommage de read/write/update en readByte/writeByte et updateByte.
+	- Les données publiques de CircularBuffer et ItemList sont devenues privées ou protégées.
+
+	- New complete english documentation in extras/Doc
+	- Some arguments of functions has been renamed.
+	- Functions read/write/update have been renamed in readByte/writeByte and updateByte.
+	- Public data of CircularBuffer are now private.
+	- Public data of EEPROM_ItemList are now protected.
+
 02/05/2017 V1.11
 	- Correction d'erreurs de compilation: __int64, EEPROM, EEPROM_SIZE undefined...
 
 	- Fix of compilation problems : __int64, EEPROM, EEPROM_SIZE undefined...
 
 01/11/2016 V1.10
-	- Renommage des fonctions de CircualrBuffer avec des minuscules et Setup en begin.
+	- Renommage des fonctions de CircularBuffer avec des minuscules et Setup en begin.
 	- Ajout de getStartRead et startWrite à CircularBuffer pour obtenir les positions de départ et laisser la sauvegarde et la restauration se faire ailleurs.
 	- Renommage de DEBUG_MODE en EEPROMEXTENT_DEBUG_MODE pour éviter des collisions de nom.
 	- Amélioration de l'exemple CicularBuffer pour tenir compte des nouvelles fonctions.

@@ -21,8 +21,8 @@ void setup()
 	p1.exists = true;
 	p1.number = 789;
 
-	EEPROMextent.write(0, 10);
-	EEPROMextent.write(1, 11);
+	EEPROMextent.writeByte(0, 10);
+	EEPROMextent.writeByte(1, 11);
 
 	EEPROMextent.writeAnything(10, p1);
 	EEPROMextent.writeString(50, "Bonjour la France");
@@ -31,8 +31,8 @@ void setup()
 	Point p2;
 	char text[100];
 
-	byte read0 = EEPROMextent.read(0);
-	byte read1 = EEPROMextent.read(1);
+	byte read0 = EEPROMextent.readByte(0);
+	byte read1 = EEPROMextent.readByte(1);
 
 	EEPROMextent.readAnything(10, p2);
 	EEPROMextent.readString(50, text, 100);
