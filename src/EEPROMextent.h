@@ -21,8 +21,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 A full explanation in french can be read at http://www.locoduino.org/ecrire/?exec=article&action=redirect&type=article&id=139 .
 
-Roughly, EEPROM is small memory area which have to problems : first, the basic functions emmbedded in the IDE to write/read
-data in this memory is very basic, and second, its lifetie could be short (relatively) if you always write the same cell of
+Roughly, EEPROM is small memory area which have two problems : first, the basic functions emmbedded in the IDE to write/read
+data in this memory is very basic, and second, its lifetime could be short (relatively) if you always write the same cell of
 this memory. This library try to answers to these two issues.
 
 1. A new bunch of functions has been added to write/read strings defined as chars array.
