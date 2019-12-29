@@ -5,7 +5,7 @@
 
 #define EEPROMLIST_EMPTY_OWNER	255
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "EEPROMextent.h"
 
 /**

@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Class for basic EEPROM functions>
 *************************************************************/
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "EEPROMextent.h"
 
 EEPROMextentClass EEPROMextent;

@@ -3,7 +3,7 @@
 #define __EEPROM_CircularBuffer_H__
 //-------------------------------------------------------------------
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "EEPROMextent.h"
 
 /**
